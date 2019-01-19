@@ -1,4 +1,4 @@
-require "botrb/version"
+require 'botrb/version'
 
 module Botrb
   class Error < StandardError; end
