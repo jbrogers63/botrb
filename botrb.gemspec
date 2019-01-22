@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['jbrogers63@gmail.com']
 
   spec.summary       = %q{Simple, small library for creating bots written in Ruby.}
-  spec.homepage      = 'https://botrb.github.io'
+  spec.homepage      = 'https://github.com/jbrogers63/botrb'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
