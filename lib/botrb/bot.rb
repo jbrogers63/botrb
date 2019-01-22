@@ -4,16 +4,18 @@ module Botrb
   # This is the class that does most of the legwork
   # of the bot.
   class Bot
+    attr_accessor :name, :host, :port, :channels, :socket
+
     # initialize expects a hash
-    def initialize(config)
-      @name     = config[:name]
-      @host     = config[:host]
-      @port     = config[:port]
-      @channels = config[:channels]
-      @socket   = TCPSocket.open @host, @port
+    def initialize(config = {})
+      @name     = config[:name] || ''
+      @host     = config[:host] || 'irc.freenode.com'
+      @port     = config[:port] || 6667
+      @channels = config[:channels] || []
     end
 
     def connect
+      @socket = TCPSocket.open @host, @port
       say "NICK #{@name}"
       say "USER #{@name} 0 * #{@name}"
       @channels.each do |channel|
