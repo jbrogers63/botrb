@@ -23,6 +23,6 @@ class BotrbTest < Minitest::Test
   def test_bot_io_methods
     setup_bot
     @bot.say 'Hello, there!'
-    assert server.gets.chomp!.eql? 'Hello, there!'
+    assert @server.gets.chomp!.eql? 'Hello, there!'
   end
 end
