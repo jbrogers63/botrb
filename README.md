@@ -1,8 +1,6 @@
 # Botrb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/botrb`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is just a library to make a simple IRC bot...
 
 ## Installation
 
@@ -22,7 +20,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After installing the gem via some method (mentioned above), do something like the following:
+
+```ruby
+config = {
+  name: 'mybot',
+  host: 'irc.freenode.com',
+  port: 6667
+}
+
+bot = Botrb::Bot.new config
+bot.run
+```
+
+TODO: Add classes and documentation for handlers...
 
 ## Development
 
@@ -32,7 +43,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/botrb.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jbrogers63/botrb.
 
 ## License
 
