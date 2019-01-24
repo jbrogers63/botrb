@@ -1,6 +1,6 @@
 # Botrb
 
-This is just a library to make a simple IRC bot...
+This is just a library to make a simple IRC bot. At this time, consider it to be barely alpha quality.
 
 ## Installation
 
