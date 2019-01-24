@@ -23,6 +23,8 @@ Or install it yourself as:
 After installing the gem via some method (mentioned above), do something like the following:
 
 ```ruby
+require 'Botrb'
+
 config = {
   name: 'mybot',
   host: 'irc.freenode.com',
