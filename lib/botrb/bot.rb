@@ -41,5 +41,9 @@ module Botrb
     def join(channel)
       say "JOIN ##{channel}"
     end
+
+    def quit(msg = "")
+      say "QUIT #{msg}"
+    end
   end
 end

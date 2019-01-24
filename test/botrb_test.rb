@@ -27,5 +27,11 @@ class BotrbTest < Minitest::Test
 
     @bot.join 'test-channel'
     assert @server.gets.chomp!.eql? 'JOIN #test-channel'
+
+    @bot.quit 'Bye!'
+    assert @server.gets.chomp!.eql? 'QUIT Bye!'
+
+    @bot.quit
+    assert @server.gets.chomp!.eql? 'QUIT '
   end
 end
