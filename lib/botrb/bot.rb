@@ -37,5 +37,9 @@ module Botrb
     def say(msg)
       @socket.puts msg
     end
+
+    def join(channel)
+      say "JOIN ##{channel}"
+    end
   end
 end

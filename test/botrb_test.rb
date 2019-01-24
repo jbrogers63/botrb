@@ -24,5 +24,8 @@ class BotrbTest < Minitest::Test
     setup_bot
     @bot.say 'Hello, there!'
     assert @server.gets.chomp!.eql? 'Hello, there!'
+
+    @bot.join 'test-channel'
+    assert @server.gets.chomp!.eql? 'JOIN #test-channel'
   end
 end
