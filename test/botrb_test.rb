@@ -3,7 +3,7 @@ require 'test_helper'
 class BotrbTest < Minitest::Test
   attr_accessor :server, :bot
 
-  def setup_bot
+  def setup
     config = {
       name: 'Botrb'
     }
@@ -16,23 +16,27 @@ class BotrbTest < Minitest::Test
   end
 
   def test_bot_setup
-    setup_bot
     assert @bot.name.eql? 'Botrb'
   end
 
-  def test_bot_io_methods
-    setup_bot
+  def test_say_method
     @bot.say 'Hello, there!'
     assert @server.gets.chomp!.eql? 'Hello, there!'
+  end
 
+  def test_join_method
     @bot.join 'test-channel'
     assert @server.gets.chomp!.eql? 'JOIN #test-channel'
-    assert @bot.channels = [ 'test-channel' ]
+    assert @bot.channels = ['test-channel']
+  end
 
+  def test_part_method
     @bot.part 'test-channel'
     assert @server.gets.chomp!.eql? 'PART #test-channel'
     assert @bot.channels.empty?
+  end
 
+  def test_quit_method
     @bot.quit 'Bye!'
     assert @server.gets.chomp!.eql? 'QUIT Bye!'
 

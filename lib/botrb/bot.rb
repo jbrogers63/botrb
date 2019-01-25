@@ -12,6 +12,7 @@ module Botrb
       @host     = config[:host] || 'irc.freenode.com'
       @port     = config[:port] || 6667
       @channels = config[:channels] || []
+      @running  = false
     end
 
     def connect
@@ -23,15 +24,28 @@ module Botrb
       end
     end
 
-    def run
-      connect
-      while (out = @socket.gets)
-        puts out
-        if out =~ /^PING :(.*)$/
-          say "PONG #{$~[1]}"
-          next
+    def start
+      Thread.new do
+        while @running
+          out = @socket.gets
+          puts out
+          if out =~ /^PING :(.*)$/
+            say "PONG #{@name}"
+            next
+          end
         end
       end
+    end
+
+    def run
+      connect
+      @running = true
+      start
+    end
+
+    def stop
+      quit "#{@name} is quitting IRC..."
+      @running = false
     end
 
     def say(msg)
@@ -44,11 +58,11 @@ module Botrb
     end
 
     def part(channel)
-      @channels = @channels - channel
+      @channels -= [channel]
       say "PART ##{channel}"
     end
 
-    def quit(msg = "")
+    def quit(msg = '')
       say "QUIT #{msg}"
     end
   end
