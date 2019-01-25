@@ -24,12 +24,6 @@ module Botrb
       end
     end
 
-    def run
-      connect
-      @running = true
-      start
-    end
-
     def start
       Thread.new do
         while @running
@@ -41,6 +35,17 @@ module Botrb
           end
         end
       end
+    end
+
+    def run
+      connect
+      @running = true
+      start
+    end
+
+    def stop
+      quit "#{@name} is quitting IRC..."
+      @running = false
     end
 
     def say(msg)
@@ -59,11 +64,6 @@ module Botrb
 
     def quit(msg = '')
       say "QUIT #{msg}"
-    end
-
-    def stop
-      quit "#{@name} is quitting IRC..."
-      @running = false
     end
   end
 end
