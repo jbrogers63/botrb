@@ -4,7 +4,7 @@ module Botrb
   # This is the class that does most of the legwork
   # of the bot.
   class Bot
-    attr_accessor :name, :host, :port, :socket
+    attr_accessor :name, :host, :port, :socket, :channels
 
     # initialize expects a hash
     def initialize(config = {})
@@ -50,7 +50,7 @@ module Botrb
     end
 
     def join(channel)
-      @channels << channel
+      @channels += [channel]
       say "JOIN ##{channel}"
     end
 
