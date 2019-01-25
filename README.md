@@ -32,7 +32,12 @@ config = {
 }
 
 bot = Botrb::Bot.new config
+
+# Start the bot's main thread
 bot.run
+
+# Join a channel
+bot.join 'test-channel'
 ```
 
 TODO: Add classes and documentation for handlers...
