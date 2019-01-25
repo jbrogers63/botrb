@@ -38,6 +38,9 @@ bot.run
 
 # Join a channel
 bot.join 'test-channel'
+
+# Join a private channel
+bot.join 'secured-channel here_is_my_password'
 ```
 
 TODO: Add classes and documentation for handlers...
