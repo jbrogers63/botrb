@@ -27,7 +27,7 @@ class BotrbTest < Minitest::Test
   def test_join_method
     @bot.join 'test-channel'
     assert @server.gets.chomp!.eql? 'JOIN #test-channel'
-    assert @bot.channels = ['test-channel']
+    assert @bot.channels.eql? ['test-channel']
   end
 
   def test_part_method
