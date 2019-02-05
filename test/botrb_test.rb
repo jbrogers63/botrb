@@ -20,8 +20,13 @@ class BotrbTest < Minitest::Test
   end
 
   def test_say_method
-    @bot.say 'Hello, there!'
-    assert @server.gets.chomp!.eql? 'Hello, there!'
+    @bot.say 'test-irc-bot', 'Hello, there!'
+    assert @server.gets.chomp!.eql? 'PRIVMSG #test-irc-bot :Hello, there!'
+  end
+
+  def test_reply_to_method
+    @bot.reply_to 'test-user', 'Hello, there!'
+    assert @server.gets.chomp!.eql? 'PRIVMSG test-user :Hello, there!'
   end
 
   def test_join_method
@@ -41,6 +46,16 @@ class BotrbTest < Minitest::Test
     assert @server.gets.chomp!.eql? 'QUIT Bye!'
 
     @bot.quit
-    assert @server.gets.chomp!.eql? 'QUIT '
+    assert @server.gets.chomp!.eql? 'QUIT'
+  end
+
+  def test_nick_method
+    @bot.nick @bot.name
+    assert @server.gets.chomp!.eql? "NICK #{@bot.name}"
+  end
+
+  def test_user_method
+    @bot.user @bot.name
+    assert @server.gets.chomp!.eql? "USER #{@bot.name} 0 * #{@bot.name}"
   end
 end
