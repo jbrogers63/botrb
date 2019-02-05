@@ -43,4 +43,9 @@ class BotrbTest < Minitest::Test
     @bot.quit
     assert @server.gets.chomp!.eql? 'QUIT'
   end
+
+  def test_nick_method
+    @bot.nick "#{@bot.name}"
+    assert @server.gets.chomp!.eql? "NICK #{@bot.name}"
+  end
 end

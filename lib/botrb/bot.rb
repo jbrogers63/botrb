@@ -62,5 +62,9 @@ module Botrb
     def quit(msg = nil)
       say msg.nil? ? "QUIT" : "QUIT #{msg}"
     end
+
+    def nick(name)
+      say "NICK #{name}"
+    end
   end
 end
