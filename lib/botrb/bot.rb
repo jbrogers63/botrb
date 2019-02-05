@@ -60,11 +60,19 @@ module Botrb
     end
 
     def quit(msg = nil)
-      say msg.nil? ? "QUIT" : "QUIT #{msg}"
+      say msg.nil? ? 'QUIT' : "QUIT #{msg}"
     end
 
     def nick(name)
       say "NICK #{name}"
+    end
+
+    # Command: USER
+    # Parameters: <username> <hostname> <servername> <realname>
+    # Use the @bot.name for username and realname and fudge
+    # the hostname and server name
+    def user(username)
+      say "USER #{username} 0 * #{username}"
     end
   end
 end

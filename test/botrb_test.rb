@@ -45,7 +45,12 @@ class BotrbTest < Minitest::Test
   end
 
   def test_nick_method
-    @bot.nick "#{@bot.name}"
+    @bot.nick @bot.name
     assert @server.gets.chomp!.eql? "NICK #{@bot.name}"
+  end
+
+  def test_user_method
+    @bot.user @bot.name
+    assert @server.gets.chomp!.eql? "USER #{@bot.name} 0 * #{@bot.name}"
   end
 end
