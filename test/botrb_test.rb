@@ -24,6 +24,11 @@ class BotrbTest < Minitest::Test
     assert @server.gets.chomp!.eql? 'PRIVMSG #test-irc-bot :Hello, there!'
   end
 
+  def test_reply_to_method
+    @bot.reply_to 'test-user', 'Hello, there!'
+    assert @server.gets.chomp!.eql? 'PRIVMSG test-user :Hello, there!'
+  end
+
   def test_join_method
     @bot.join 'test-channel'
     assert @server.gets.chomp!.eql? 'JOIN #test-channel'

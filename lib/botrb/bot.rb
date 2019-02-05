@@ -53,6 +53,10 @@ module Botrb
       write "PRIVMSG ##{channel} :#{msg}"
     end
 
+    def reply_to(user, msg)
+      write "PRIVMSG #{user} :#{msg}"
+    end
+
     def join(channel)
       @channels += [channel]
       write "JOIN ##{channel}"
