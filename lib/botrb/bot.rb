@@ -4,7 +4,8 @@ module Botrb
   # This is the class that does most of the legwork
   # of the bot.
   class Bot
-    attr_accessor :name, :host, :port, :socket, :channels
+    attr_reader :name, :host, :port
+    attr_accessor :socket, :channels
 
     # initialize expects a hash
     def initialize(config = {})
