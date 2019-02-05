@@ -41,6 +41,6 @@ class BotrbTest < Minitest::Test
     assert @server.gets.chomp!.eql? 'QUIT Bye!'
 
     @bot.quit
-    assert @server.gets.chomp!.eql? 'QUIT '
+    assert @server.gets.chomp!.eql? 'QUIT'
   end
 end

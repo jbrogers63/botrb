@@ -59,8 +59,8 @@ module Botrb
       say "PART ##{channel}"
     end
 
-    def quit(msg = '')
-      say "QUIT #{msg}"
+    def quit(msg = nil)
+      say msg.nil? ? "QUIT" : "QUIT #{msg}"
     end
   end
 end
