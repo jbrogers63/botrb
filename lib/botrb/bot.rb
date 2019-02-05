@@ -17,8 +17,8 @@ module Botrb
 
     def connect
       @socket = TCPSocket.open @host, @port
-      say "NICK #{@name}"
-      say "USER #{@name} 0 * #{@name}"
+      nick @name
+      user @name
     end
 
     def start
@@ -27,7 +27,7 @@ module Botrb
           out = @socket.gets
           puts out
           if out =~ /^PING :(.*)$/
-            say "PONG #{@name}"
+            write "PONG #{@name}"
             next
           end
         end
@@ -45,26 +45,30 @@ module Botrb
       @running = false
     end
 
-    def say(msg)
+    def write(msg)
       @socket.puts msg
+    end
+
+    def say(channel, msg)
+      write "PRIVMSG ##{channel} :#{msg}"
     end
 
     def join(channel)
       @channels += [channel]
-      say "JOIN ##{channel}"
+      write "JOIN ##{channel}"
     end
 
     def part(channel)
       @channels -= [channel]
-      say "PART ##{channel}"
+      write "PART ##{channel}"
     end
 
     def quit(msg = nil)
-      say msg.nil? ? 'QUIT' : "QUIT #{msg}"
+      write msg.nil? ? 'QUIT' : "QUIT #{msg}"
     end
 
     def nick(name)
-      say "NICK #{name}"
+      write "NICK #{name}"
     end
 
     # Command: USER
@@ -72,7 +76,7 @@ module Botrb
     # Use the @bot.name for username and realname and fudge
     # the hostname and server name
     def user(username)
-      say "USER #{username} 0 * #{username}"
+      write "USER #{username} 0 * #{username}"
     end
   end
 end

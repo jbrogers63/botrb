@@ -20,8 +20,8 @@ class BotrbTest < Minitest::Test
   end
 
   def test_say_method
-    @bot.say 'Hello, there!'
-    assert @server.gets.chomp!.eql? 'Hello, there!'
+    @bot.say 'test-irc-bot', 'Hello, there!'
+    assert @server.gets.chomp!.eql? 'PRIVMSG #test-irc-bot :Hello, there!'
   end
 
   def test_join_method
