@@ -4,16 +4,19 @@ module Botrb
   # This is the class that does most of the legwork
   # of the bot.
   class Bot
-    attr_reader :name, :host, :port
-    attr_accessor :socket, :channels
+    attr_accessor :name, :host, :port, :socket, :channels
 
     # initialize expects a hash
     def initialize(config = {})
-      @name     = config[:name] || ''
-      @host     = config[:host] || 'irc.freenode.com'
-      @port     = config[:port] || 6667
-      @channels = []
-      @running  = false
+      if block_given?
+        yield self
+      else
+        @name     = config[:name] || ''
+        @host     = config[:host] || 'irc.freenode.com'
+        @port     = config[:port] || 6667
+        @channels = []
+        @running  = false
+      end
     end
 
     def connect
