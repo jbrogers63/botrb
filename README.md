@@ -33,6 +33,14 @@ config = {
 
 bot = Botrb::Bot.new config
 
+# Alternatively, you can setup the bot thusly:
+
+bot = Botrb::Bot.new do |b|
+  b.name = 'mybot'
+  b.host = 'irc.freenode.com'
+  b.port = 6667
+end
+
 # Start the bot's main thread
 bot.run
 
