@@ -58,4 +58,13 @@ class BotrbTest < Minitest::Test
     @bot.user @bot.name
     assert @server.gets.chomp!.eql? "USER #{@bot.name} 0 * #{@bot.name}"
   end
+
+  def test_on_event_handling
+    @bot.on_event nil, /^PING.*/ do
+      @bot.write "PONG #{@bot.name}"
+    end
+    assert @bot.handlers.count.eql? 1
+    @bot.dispatch Botrb::Event.parse_event 'PING :irc.host.com'
+    @server.gets.chomp!.eql? "PONG #{@bot.name}"
+  end
 end
