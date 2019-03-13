@@ -5,14 +5,15 @@ class EventTest < Minitest::Test
 
   def setup
     @msg = 'test!~test@localhost PRIVMSG #test-channel :hello'
+    @event = Botrb::Event.parse_event(@msg)
   end
 
   def test_event_parse
-    event = Botrb::Event.parse_event(@msg)
-    event.user.eql? 'test'
-    event.hostname.eql? 'localhost'
-    event.type.eql? 'PRIVMSG'
-    event.channel.eql? '#test-channel'
-    event.message.eql? 'hello'
+    # event = Botrb::Event.parse_event(@msg)
+    @event.user.eql? 'test'
+    @event.hostname.eql? 'localhost'
+    @event.type.eql? 'PRIVMSG'
+    @event.channel.eql? '#test-channel'
+    @event.message.eql? 'hello'
   end
 end

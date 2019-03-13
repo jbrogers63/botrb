@@ -1,21 +1,23 @@
 require 'socket'
+require_relative 'event'
 
 module Botrb
   # This is the class that does most of the legwork
   # of the bot.
   class Bot
-    attr_accessor :name, :host, :port, :socket, :channels
+    attr_accessor :name, :host, :port, :socket, :channels, :handlers
 
     # initialize expects a hash
     def initialize(config = {})
+      @handlers = []
+      @channels = []
+      @running  = false
       if block_given?
         yield self
       else
         @name     = config[:name] || ''
         @host     = config[:host] || 'irc.freenode.com'
         @port     = config[:port] || 6667
-        @channels = []
-        @running  = false
       end
     end
 
@@ -28,18 +30,18 @@ module Botrb
     def start
       Thread.new do
         while @running
-          out = @socket.gets
-          puts out
-          if out =~ /^PING :(.*)$/
-            write "PONG #{@name}"
-            next
-          end
+          event = Botrb::Event.parse_event @socket.gets
+          puts event
+          dispatch event
         end
       end
     end
 
     def run
       connect
+      on_event nil, /^PING.*/ do
+        @bot.write "PONG #{@name}"
+      end
       @running = true
       start
     end
@@ -85,6 +87,21 @@ module Botrb
     # the hostname and server name
     def user(username)
       write "USER #{username} 0 * #{username}"
+    end
+
+    def on_event(type, regex = //, &block)
+      handler = Botrb::Handler.new(type, regex, &block)
+      @handlers.push handler
+    end
+
+    def dispatch(event)
+      matched_handlers = @handlers.select do |h|
+        h.match event
+      end
+
+      matched_handlers.map do |h|
+        Thread.new { h.block.call }
+      end
     end
   end
 end
