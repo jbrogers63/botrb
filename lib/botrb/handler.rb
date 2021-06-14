@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require 'botrb/event'
 
 module Botrb

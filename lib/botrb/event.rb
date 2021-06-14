@@ -1,9 +1,12 @@
+# frozen_string_literal: false
+
 module Botrb
   # Add some basic handling for 'events', which are full
   # IRC messages to be parsed. This should help with implementing
   # later features.
   class Event
     attr_accessor :user, :hostname, :type, :channel, :message
+
     EVENT_FORMAT = /(.*)!~(.*) (.*) (.*) :(.*)/.freeze
 
     def initialize(user, hostname, type, channel, message)

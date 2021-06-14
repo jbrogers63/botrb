@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require 'botrb/version'
 require 'botrb/bot'
 require 'botrb/event'
