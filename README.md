@@ -27,7 +27,7 @@ require 'Botrb'
 
 config = {
   name: 'mybot',
-  host: 'irc.freenode.com',
+  host: 'irc.libera.chat',
   port: 6667
 }
 
