@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 2.2'
   spec.add_development_dependency 'rake', '~> 12.3'
-  spec.add_development_dependency 'minitest', '~> 5.0'
+  spec.add_development_dependency 'minitest', '~> 5.0 '
   spec.add_development_dependency 'rubocop', '~> 1.16.0'
+  spec.add_development_dependency 'solargraph', '~> 0.42'
 end
